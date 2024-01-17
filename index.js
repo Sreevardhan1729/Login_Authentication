@@ -53,7 +53,7 @@ app.post("/login",async (req,res)=>{
     const {email,password} = req.body
     let user = await User.findOne({email});
     if(!user){
-        return res.redirect("/register");
+        return res.render("register",{message:"Account does not exist"});
     }
     const isMatch = await bcrypt.compare(password,user.password);
     if(isMatch){
@@ -71,8 +71,12 @@ app.post("/register",async (req,res)=>{
     const {name , email,password} =req.body
 
     let user = await User.findOne({email});
+    let userName = await User.findOne({name});
     if(user){
-        return res.redirect("/login");
+        return res.render("login",{message:"Account already exists"});
+    }
+    else if(userName){
+        return res.render("register",{message:"UserName already taken"})
     }
     const hashedPass = await bcrypt.hash(password,10)
     user= await User.create({
