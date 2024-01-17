@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    background-color: antiquewhite;
+}
+main{
+    padding: 20px;
+    box-sizing:content-box;
+    background-color:burlywood;
+    height: auto;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+}
+input{
+    margin: 20px 10px;
+}
+button{
+    margin: 0 0 0 60px;
+}
+.error{
+    color: red;
+    text-align: right;
+    font-size: 0.7rem;
+    margin: 0 1rem;
+}
