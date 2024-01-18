@@ -1,5 +1,5 @@
 import express from 'express';
-import path from 'path'
+import path from 'path';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
@@ -53,7 +53,7 @@ app.post("/login",async (req,res)=>{
     const {email,password} = req.body
     let user = await User.findOne({email});
     if(!user){
-        return res.render("register",{message:"Account does not exist"});
+        return res.render("register",{email,message:"Account does not exist"});
     }
     const isMatch = await bcrypt.compare(password,user.password);
     if(isMatch){
@@ -73,7 +73,7 @@ app.post("/register",async (req,res)=>{
     let user = await User.findOne({email});
     let userName = await User.findOne({name});
     if(user){
-        return res.render("login",{message:"Account already exists"});
+        return res.render("login",{email,message:"Account already exists"});
     }
     else if(userName){
         return res.render("register",{message:"UserName already taken"})
